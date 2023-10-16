@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>Lab1_2629</title>
-    <link href="styles.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
 <?php
 
 session_start();
@@ -102,74 +94,5 @@ function resultsTable()
         echo '</tr>';
     }
 }
-?>
-    <form action="index.php" method="post" onsubmit="return fullValidation()">
-    <table class="table" border="0" cellpadding="0" cellspacing="0">
-        <thead id="head">
-        <tr>
-            <th colspan="2" class = table>
-                <div class="header-text">Трошкин Александр Евгеньевич P3216 2629</div>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr id="canvas">
-            <td colspan="2"><canvas id='schedule' height="270px"></canvas></td>
-        </tr>
-        <tr class="values">
-            <td class="values"><label for="input_x" id="label_x">Значение X, {-5 ... 3}</label></td>
-            <td class="values_input"><input class="input_text" type="text" id="input_x" name="input_x"/></td>
-        </tr>
-        <tr class="values">
-            <td class="values"><label for="input_y" id="label_y">Значение Y, {-3 ... 3}</label></td>
-            <td class="values_input"><input class="input_text" type="text" id="input_y" name="input_y"/></td>
-        </tr>
-        <tr class="values">
-            <td class="values"><label for="checkbox_r" id="label_r">Значение R, {-3 ... 3}</label></td>
-            <td class="values_input">
-                <label>
-                    <input type="checkbox" name="value_r[]" id="r1" value="1">1
-                </label>
-                <label>
-                    <input type="checkbox" name="value_r[]" id="r2" value="1.5">1.5
-                </label>
-                <label>
-                    <input type="checkbox" name="value_r[]" id="r3" value="2">2
-                </label>
-                <label>
-                    <input type="checkbox" name="value_r[]" id="r4" value="2.5">2.5
-                </label>
-                <label>
-                    <input type="checkbox" name="value_r[]" id="r5" value="3">3
-                </label>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" id="button_str">
-                <button type="submit" id="check" name="button" onclick="isValidateValues()">Проверить</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <table class="resul_table">
-                    <thead id="result_head">
-                        <td>X</td>
-                        <td>Y</td>
-                        <td>R</td>
-                        <td>Попадание</td>
-                    </thead>
-                    <tbody id="table_out">
-                        <?php
-                        resultsTable($rows);
-                        ?>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    </form>
-    <script type="text/javascript" src="scripts/canvas.js"></script>
-    <script type="text/javascript" src="scripts/validation.js"></script>
-</body>
-</html>
+
+include('file.html');

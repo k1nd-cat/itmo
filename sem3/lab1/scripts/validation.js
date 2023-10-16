@@ -4,6 +4,7 @@ function fullValidation() {
 
 let buttonClearClicked = false;
 let validValues = false;
+
 function isButtonClearClicked() {
     buttonClearClicked = true;
 }
