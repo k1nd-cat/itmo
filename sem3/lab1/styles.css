@@ -73,6 +73,24 @@ button[name="button"] {
     font-family: Arial, serif;
 }
 
+[id=button_clear_td] {
+    height: 75px;
+    border-bottom: 1px solid rgb(237, 238, 238);
+    font-size: 18px;
+    font-family: Arial, serif;
+}
+
+[id=clear] {
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+    background-color: rgba(165, 0, 0, 0.33);
+    color: white;
+    border: 0;
+    font-size: 16px;
+    font-family: Arial, serif;
+}
+
 #result_head {
     font-family: Arial, serif;
 }

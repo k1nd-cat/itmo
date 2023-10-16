@@ -6,6 +6,7 @@ let buttonClearClicked = false;
 let validValues = false;
 
 function isButtonClearClicked() {
+    clearCustomValidity();
     buttonClearClicked = true;
 }
 
@@ -48,4 +49,15 @@ function checkR(valueR) {
         }
     valueR[0].setCustomValidity("Выберите значение R");
     return false;
+}
+
+function clearCustomValidity() {
+    let x = document.getElementById("input_x");
+    let y = document.getElementById("input_y");
+    let r = document.querySelectorAll('input[type="checkbox"]');
+    x.setCustomValidity("");
+    x.reportValidity();
+    y.setCustomValidity("");
+    y.reportValidity();
+    r[0].setCustomValidity("");
 }
