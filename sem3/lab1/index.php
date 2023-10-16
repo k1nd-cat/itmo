@@ -103,7 +103,7 @@ function resultsTable()
     }
 }
 ?>
-    <form action="index.php" method="post" onsubmit="return check_input()">
+    <form action="index.php" method="post" onsubmit="return fullValidation()">
     <table class="table" border="0" cellpadding="0" cellspacing="0">
         <thead id="head">
         <tr>
@@ -146,7 +146,7 @@ function resultsTable()
         </tr>
         <tr>
             <td colspan="2" id="button_str">
-                <button type="submit" id="check" name="button">Проверить</button>
+                <button type="submit" id="check" name="button" onclick="isValidateValues()">Проверить</button>
             </td>
         </tr>
         <tr>
