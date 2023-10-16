@@ -1,0 +1,93 @@
+#canvas {
+    height: 30vh;
+}
+
+.header-text {
+    color: white;
+    font-family: fantasy;
+    font-size: 35px;
+}
+#schedule {
+    justify-content: center;
+}
+
+#head {
+    background-color: rgb(90, 211, 206);
+    height: 75px;
+}
+
+#canvas{
+    background-color: rgb(90, 211, 206);
+    height: 300px;
+}
+
+/*селектор класса*/
+.input_text {
+    justify-content: flex-start;
+    height: 40px;
+    width: 120px;
+    border: 1px solid rgb(237, 238, 238);
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.values, .values_input, #button_str {
+    height: 75px;
+    border-bottom: 1px solid rgb(237, 238, 238);
+    font-size: 18px;
+    font-family: Arial, serif;
+}
+
+.values {
+    border-left: 1px solid rgb(0, 166, 166);
+}
+
+.values_input {
+    border-right: 1px solid rgb(0, 166, 166);
+}
+
+.resul_table {
+    border-left: 1px solid rgb(0, 166, 166);
+    border-right: 1px solid rgb(0, 166, 166);
+    border-bottom: 1px solid rgb(0, 166, 166);
+}
+
+#result_head {
+    font-weight: normal;
+}
+
+#button_str {
+    border-left: 1px solid rgb(0, 166, 166);
+    border-right: 1px solid rgb(0, 166, 166);
+}
+
+/*Селектор атрибута*/
+button[name="button"] {
+    height: 40px;
+    width: 180px;
+    border-radius: 10px;
+    background-color: rgb(0, 166, 166);
+    color: white;
+    border: 0;
+    font-size: 18px;
+    font-family: Arial, serif;
+}
+
+#result_head {
+    font-family: Arial, serif;
+}
+
+/*селектор элемента*/
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+/*Селектор псевдоэлемента*/
+::selection {
+    background-color: #00a587;
+    color: white;
+}
