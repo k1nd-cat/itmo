@@ -18,11 +18,20 @@ setTimeout(() => {
 let r = document.querySelectorAll('input[type="radio"]');
 for(let radio in r) {
     r[radio].onclick = function() {
-        radius = mark * parseFloat(this.value);
-        ctx.clearRect(0, 0, end, end);
-        graph();
-        axes();
-    }
+	  	const prevRadius = radius; 
+	    radius = mark * parseFloat(this.value);
+	    ctx.clearRect(0, 0, end, end);
+	    graph();
+	    axes();
+	
+	  	window.canvasValues.forEach((point) => {
+            point.valueX = point.valueX * radius / prevRadius;
+      		point.valueY = point.valueY * radius / prevRadius;
+            let x = point.valueX * mark + centre; 
+            let y = point.valueY * mark * -1 + centre;
+			drawPoint(x, y, point.valueX, point.valueY);
+		});
+	}
 }
 
 function axes() {
@@ -109,10 +118,18 @@ function getCursorPosition(canvas, event) {
 
 	canvasValues.push({ valueX, valueY });
 
+	drawPoint(x, y, valueX, valueY);
+}
+
+function drawPoint(x, y, valueX, valueY) {
     ctx.beginPath();
-    ctx.strokeStyle = 'rgb(0,68,146)';
-    ctx.fillStyle = 'rgb(0,68,146)';
-    ctx.moveTo(x, y);
+    if (checkArea(valueX, valueY)) {
+      ctx.strokeStyle = 'rgb(146,0,0)';
+      ctx.fillStyle = 'rgb(146,0,0)';
+  	} else {
+      ctx.strokeStyle = 'rgb(0,68,146)';
+      ctx.fillStyle = 'rgb(0,68,146)';
+    }    ctx.moveTo(x, y);
     ctx.arc(x, y, 3, 2 * Math.PI, 0, false);
     ctx.fill();
     ctx.closePath();
@@ -123,3 +140,12 @@ canvas.addEventListener('mousedown', function(e) {
     if (checkDrawingR())
         getCursorPosition(canvas, e)
 })
+
+function checkArea(x, y) {
+  r = radius / mark;
+  if (((x * x + y * y <= r * r) && x >= 0 && y >= 0) ||
+                (y >= x - r / 2 && x >= 0 && y <= 0) ||
+                (x <= 0 && y >= 0 && x >= -1 * r / 2 && y <= r))
+            return true;
+        return false;
+}
