@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<title>Lab3_62618 - main</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
+	<script>
+		function onload() {
+			setTimeout(() => {
+				window.results = eval(document.getElementById('main_form:results').value);
+				console.log(results);
+				results.forEach((point) => {
+					let x = point.x * mark + centre;
+					let y = point.y * mark * -1 + centre;
+					drawPoint(x, y, point.x, point.y);
+				});
+			}, 300);
+		}
+	</script>
+</h:head>
+<h:body onload="onload()">
+	<div class="main">
+		<div>
+			<h1>Главная страница</h1>
+			<canvas id='schedule' height="270px"></canvas>
+			<h:form id="main_form">
+				<p:messages>
+					<p:autoUpdate />
+				</p:messages>
+				<p:message for="y" />
+				<h:outputText value="#{validationView.text}" />
+				<p:inputText value="#{results.resultsStr}" id="results"
+					type="hidden" />
+				<p:outputLabel id="serverMessage" value="#{coords.error}" />
+				<p:panelGrid columns="2" columnClasses="column25,column75">
+					<p:outputLabel value="x" />
+					<p:toolbar>
+						<p:toolbarGroup>
+							<p:commandLink value="-2" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="-2" />
+							</p:commandLink>
+							<p:commandLink value="-1.5" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="-1.5" />
+							</p:commandLink>
+							<p:commandLink value="-1" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="-1" />
+							</p:commandLink>
+							<p:commandLink value="-0.5" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="-0.5" />
+							</p:commandLink>
+							<p:commandLink value="0" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="0" />
+							</p:commandLink>
+							<p:commandLink value="0.5" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="0.5" />
+							</p:commandLink>
+							<p:commandLink value="1" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="1" />
+							</p:commandLink>
+							<p:commandLink value="1.5" update="x">
+								<f:setPropertyActionListener target="#{coords.x}" value="1.5" />
+							</p:commandLink>
+							<h:outputText id="x" value="#{coords.x}" styleClass="xOutput" />
+						</p:toolbarGroup>
+					</p:toolbar>
+					<p:outputLabel for="y" value="y (-3; 5)" />
+					<p:inputText id="y" value="#{coords.y}"
+						requiredMessage="y is mandatory">
+						<f:validateDoubleRange minimum="-2.999999999999"
+							maximum="4.99999999999" />
+					</p:inputText>
+					<p:outputLabel for="r" value="r" />
+					<h:selectOneRadio id="r" value="#{coords.r}">
+						<f:selectItem itemValue="1" itemLabel="1" />
+						<f:selectItem itemValue="1.5" itemLabel="1.5" />
+						<f:selectItem itemValue="2" itemLabel="2" />
+						<f:selectItem itemValue="2.5" itemLabel="2.5" />
+						<f:selectItem itemValue="3" itemLabel="3" />
+					</h:selectOneRadio>
+				</p:panelGrid>
+
+				<p:toolbar>
+					<p:toolbarGroup>
+						<p:commandButton value="Стартовая страница"
+							action="index?faces-redirect=true">
+						</p:commandButton>
+					</p:toolbarGroup>
+					<p:toolbarGroup>
+						<p:commandButton value="Отправить" partialSubmit="false"
+							action="#{coords.processResult}" validateClient="true"
+							update="serverMessage">
+						</p:commandButton>
+					</p:toolbarGroup>
+				</p:toolbar>
+				<h:commandScript name="selectPoint" action="#{coords.selectPoint}" />
+			</h:form>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/canvas.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
+</h:body>
+</html>

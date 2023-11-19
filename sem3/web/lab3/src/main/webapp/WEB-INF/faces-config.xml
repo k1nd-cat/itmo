@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.3"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+    	http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+>
+
+	<managed-bean>
+		<managed-bean-name>coords</managed-bean-name>
+        <managed-bean-class>lab3.model.Coords</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>calculator</property-name>
+            <property-class>lab3.controller.Calculator</property-class>
+            <value>#{calculator}</value>
+        </managed-property>
+        <managed-property>
+			 <property-name>context</property-name>
+			 <value>#{facesContext}</value>
+        </managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>calculator</managed-bean-name>
+        <managed-bean-class>lab3.controller.Calculator</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>results</managed-bean-name>
+        <managed-bean-class>lab3.view.CalcResults</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+        
+</faces-config>

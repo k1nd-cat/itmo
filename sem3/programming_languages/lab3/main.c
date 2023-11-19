@@ -6,7 +6,7 @@
 
 typedef struct params
 {
-    char *input; // bmp file
+    char *input; // bmp inputFile
     char *output; // result dir
     int max_iter; // iterations
     int dump_freq; // frequency of dumps
@@ -27,7 +27,7 @@ typedef struct header
     char *fileHeader; // header till data begin
 } header;
 
-header bmpheader;
+header bmpHeader;
 
 /**
  * Get params structure from command line.
@@ -59,46 +59,46 @@ void readParams(int argc, char *argv[]) {
  */
 int checkParams() {
     if (strlen(appparams.input) == 0 || strlen(appparams.output) == 0) {
-        printf("ERROR: wrong params\nUsage:\n--input - path to bmp file with begin state (mandatory)\n--output - path to output dir (mandatory)\n--max_iter - amount of iterations\n--dump_freq - frequency of dumps");
+        printf("ERROR: wrong params\nUsage:\n--input - path to bmp inputFile with begin state (mandatory)\n--output - path to output dir (mandatory)\n--max_iter - amount of iterations\n--dump_freq - frequency of dumps");
         return 0;
     }
     return 1;
 }
 
 /**
- * Read header of file.
+ * Read header of inputFile.
  */
 int readHeader(FILE *file) {
     fseek(file, 0, SEEK_SET);
     unsigned short type;
     if (fread(&type, sizeof(short), 1, file) == 0) return 0;
     if (type != 0x4d42) {
-        printf("ERROR: input file is not bmp");
+        printf("ERROR: input inputFile is not bmp");
         return 0;
     }
     if (fseek(file, 8, SEEK_CUR) != 0) return 0;
-    if (fread(&bmpheader.offset, sizeof(int), 1, file) == 0) return 0;
+    if (fread(&bmpHeader.offset, sizeof(int), 1, file) == 0) return 0;
     if (fseek(file, 4, SEEK_CUR) != 0) return 0;
-    if (fread(&bmpheader.width, sizeof(int), 1, file) == 0) return 0;
-    if (fread(&bmpheader.height, sizeof(int), 1, file) == 0) return 0;
+    if (fread(&bmpHeader.width, sizeof(int), 1, file) == 0) return 0;
+    if (fread(&bmpHeader.height, sizeof(int), 1, file) == 0) return 0;
     if (fseek(file, 2, SEEK_CUR) != 0) return 0;
-    if (fread(&bmpheader.bitsByPixel, sizeof(short), 1, file) == 0) return 0;
-    // printf("HEADER: Offset: %d, Width: %d, Height: %d, BitsByPixel: %d\n", bmpheader.offset, bmpheader.width, bmpheader.height, bmpheader.bitsByPixel);
-    if (bmpheader.bitsByPixel != 1) {
-        printf("ERROR: input file is not mono bmp, please save with 1 bit per pixel");
+    if (fread(&bmpHeader.bitsByPixel, sizeof(short), 1, file) == 0) return 0;
+    // printf("HEADER: Offset: %d, Width: %d, Height: %d, BitsByPixel: %d\n", bmpHeader.offset, bmpHeader.width, bmpHeader.height, bmpHeader.bitsByPixel);
+    if (bmpHeader.bitsByPixel != 1) {
+        printf("ERROR: input inputFile is not mono bmp, please save with 1 bit per pixel");
         return 0;
     }
-    bmpheader.fileHeader = calloc(1, bmpheader.offset);
+    bmpHeader.fileHeader = calloc(1, bmpHeader.offset);
     if (fseek(file, 0, SEEK_SET) != 0) return 0;
-    if (fread(bmpheader.fileHeader, 1, bmpheader.offset, file) == 0) return 0;
+    if (fread(bmpHeader.fileHeader, 1, bmpHeader.offset, file) == 0) return 0;
     return 1;
 }
 
 void debugData(short **data) {
     int x = 0, y;
-    for (; x < bmpheader.height; x++) {
+    for (; x < bmpHeader.height; x++) {
         printf("%d:  ", x);
-        for (y = 0; y < bmpheader.width; y++) {
+        for (y = 0; y < bmpHeader.width; y++) {
             printf("%d  ", data[x][y]);
         }
         printf("\n--------------\n");
@@ -109,31 +109,34 @@ void debugData(short **data) {
 /**
  * Read initial state of the game.
  */
-readData(FILE *file, short **data) {
-fseek(file, bmpheader.offset, SEEK_SET);
-int x = 0, y = 0, readSymbols = 0;
-while (x < bmpheader.height) {
-unsigned char symbol = fgetc(file);
-if (++readSymbols == 4) {
-readSymbols = 0;
-}
-// process symbol
-short bit;
-for (bit = 7; y < bmpheader.width && bit >= 0; bit--) {
-data[x][y] = ((1 << bit) & symbol) > 0 ? POINT: NO_POINT;
-y++;
-}
-if (y == bmpheader.width) {
-// read till 4 bytes in one line
-while (readSymbols < 4) {
-fgetc(file);
-readSymbols++;
-}
-readSymbols = 0;
-x++;
-y = 0;
-}
-}
+void readData(FILE *file, short **data) {
+    fseek(file, bmpHeader.offset, SEEK_SET);
+    int x = 0, y = 0, readSymbols = 0;
+    while (x < bmpHeader.height) {
+        unsigned char symbol = fgetc(file);
+        if (++readSymbols == 4) {
+            readSymbols = 0;
+        }
+
+    // process symbol
+        short bit;
+        for (bit = 7; y < bmpHeader.width && bit >= 0; bit--) {
+            data[x][y] = ((1 << bit) & symbol) > 0 ? POINT: NO_POINT;
+            y++;
+        }
+
+        if (y == bmpHeader.width) {
+        // read till 4 bytes in one line
+            while (readSymbols < 4) {
+                fgetc(file);
+                readSymbols++;
+            }
+
+            readSymbols = 0;
+            x++;
+            y = 0;
+        }
+    }
 }
 
 /**
@@ -145,10 +148,10 @@ int calcNeighbours(short **data, int x, int y) {
         for (subY = y - 1; subY <= y + 1; subY++) {
             if (subX == x && subY == y) continue; // current point
             int nX = subX, nY = subY;
-            if (nX == -1) nX = bmpheader.height - 1; // take from other side
-            else if (nX == bmpheader.height) nX = 0; // take from other side
-            if (nY == -1) nY = bmpheader.width - 1; // take from other side
-            else if (nY == bmpheader.width) nY = 0; // take from other side
+            if (nX == -1) nX = bmpHeader.height - 1; // take from other side
+            else if (nX == bmpHeader.height) nX = 0; // take from other side
+            if (nY == -1) nY = bmpHeader.width - 1; // take from other side
+            else if (nY == bmpHeader.width) nY = 0; // take from other side
             if (data[nX][nY] == POINT) {
                 neighbours++;
             }
@@ -168,11 +171,11 @@ int calcNeighbours(short **data, int x, int y) {
  * return 1 if game over (no changes or all pixels die).
  */
 int gameIteration(short **data) {
-    short **newData = calloc(sizeof(short*), bmpheader.height);
+    short **newData = calloc(sizeof(short*), bmpHeader.height);
     int x = 0, y, changed = 0, liveExists = 0;
-    for (; x < bmpheader.height; x++) {
-        newData[x] = calloc(sizeof(short), bmpheader.width);
-        for (y = 0; y < bmpheader.width; y++) {
+    for (; x < bmpHeader.height; x++) {
+        newData[x] = calloc(sizeof(short), bmpHeader.width);
+        for (y = 0; y < bmpHeader.width; y++) {
             int neighbours = calcNeighbours(data, x, y);
             if (data[x][y] == POINT) {
                 if (neighbours < 2 || neighbours > 3) {
@@ -193,8 +196,8 @@ int gameIteration(short **data) {
             }
         }
     }
-    for (x = 0; x < bmpheader.height; x++) {
-        for (y = 0; y < bmpheader.width; y++) {
+    for (x = 0; x < bmpHeader.height; x++) {
+        for (y = 0; y < bmpHeader.width; y++) {
             data[x][y] = newData[x][y];
         }
         free(newData[x]);
@@ -208,10 +211,10 @@ int gameIteration(short **data) {
  * Put data in memory.
  */
 short **prepareData() {
-    short **data = calloc(sizeof(short*), bmpheader.height);
+    short **data = calloc(sizeof(short*), bmpHeader.height);
     int x = 0;
-    for (; x < bmpheader.height; x++) {
-        data[x] = calloc(sizeof(short), bmpheader.width);
+    for (; x < bmpHeader.height; x++) {
+        data[x] = calloc(sizeof(short), bmpHeader.width);
     }
     return data;
 }
@@ -221,27 +224,27 @@ short **prepareData() {
  */
 void freeData(short **data) {
     int x = 0;
-    for (; x < bmpheader.height; x++) {
+    for (; x < bmpHeader.height; x++) {
         free(data[x]);
     }
     free(data);
 }
 
 /**
- * Save state iteration to file.
+ * Save state iteration to inputFile.
  */
 void saveData(short **data, int iteration) {
     char *fileName = calloc(1, strlen(appparams.output) + 20);
     sprintf(fileName, "%s/step_%d.bmp", appparams.output, iteration);
-    FILE *file = fopen(fileName, "wb"); // open file for read
+    FILE *file = fopen(fileName, "wb"); // open inputFile for read
     free(fileName);
     fseek(file, 0, SEEK_SET);
-    fwrite(bmpheader.fileHeader, 1, bmpheader.offset, file);
+    fwrite(bmpHeader.fileHeader, 1, bmpHeader.offset, file);
     int x = 0, y = 0, writtenSymbols = 0;
-    while (x < bmpheader.height) {
+    while (x < bmpHeader.height) {
         unsigned char symbol = (char)0;
         short bit;
-        for (bit = 7; y < bmpheader.width && bit >= 0; bit--) {
+        for (bit = 7; y < bmpHeader.width && bit >= 0; bit--) {
             if (data[x][y] == POINT) {
                 symbol = symbol | (1 << bit);
             }
@@ -252,7 +255,7 @@ void saveData(short **data, int iteration) {
             writtenSymbols = 0;
         }
         symbol = (char)0;
-        if (y == bmpheader.width) {
+        if (y == bmpHeader.width) {
             // write till 4 bytes in one line
             while (writtenSymbols < 4) {
                 fputc((char)0, file);
@@ -271,9 +274,9 @@ void saveData(short **data, int iteration) {
  */
 
 void game() {
-    FILE *file = fopen(appparams.input, "rb"); // open file for read
+    FILE *file = fopen(appparams.input, "rb"); // open inputFile for read
     if (file == NULL) {
-        printf("Cannot open file: %s\n");
+        printf("Cannot open inputFile: %s\n");
         exit(0);
     }
     if (readHeader(file) != 1) {
@@ -296,7 +299,7 @@ void game() {
         if (stop == 1) break; // no changes or all die
     }
     freeData(data);
-    free(bmpheader.fileHeader);
+    free(bmpHeader.fileHeader);
 }
 
 int main(int argc, char *argv[]) {
