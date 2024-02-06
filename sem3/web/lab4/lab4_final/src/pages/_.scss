@@ -1,0 +1,142 @@
+html, body {
+    height: 99%;
+}
+
+.card {
+    border: 1px solid rgb(248, 248, 248);
+    border-radius: 10px;
+    &--root {
+        box-shadow: 3px 3px 12px 4px rgba(50, 50, 50, 0.2);
+        background-color: rgb(248, 248, 248);
+        width: 600px;
+        @media (max-width: 600px) {
+            width: 500px;
+        }
+        @media (max-width: 500px) {
+            width: 420px;
+        }
+        @media (max-width: 420px) {
+            width: 360px;
+        }
+    }
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    @media (max-width: 419px) {
+        flex-direction: column;
+    }
+
+    .loginButton {
+        width: 170px;
+        height: 50px;
+        margin-top: 5px;
+        &:not(:first-child) {
+            margin-left: 10px;
+            @media (max-width: 419px) {
+                margin-left: 0px;
+            }
+        }
+        @media (max-width: 419px) {
+            width: 200px;
+        }
+    }
+}
+
+.loginPanel {
+
+    border-radius: 0px;
+    width: 350px;
+    background: none;
+    border: none;
+
+    .loginForm {
+        display: flex;
+        flex-direction: column;
+    
+        input {
+            width: 320px;
+            height: 50px;
+            font-size: 1.1rem;
+        }
+
+        #password {
+            width: 320px;
+            height: 50px;
+            font-size: 1.1rem;
+        }
+    
+        label {
+            margin-top: 20px;
+        }
+    }
+    
+}
+
+.logout_toolbar--container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.logout_toolbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 780px;
+    padding: 20px 30px;
+    margin: 20px 20px;
+    .logoutButton {
+        width: 150px;
+    }
+
+    .title {
+        font-size: 1.3rem;
+    }
+}
+
+.panel {
+    border: 1px solid rgb(248, 248, 248);
+    border-radius: 10px;
+    box-shadow: 3px 3px 12px 4px rgba(50, 50, 50, 0.2);
+    background-color: rgb(248, 248, 248);
+}
+
+.mainPanel--container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .mainPanel {
+        max-width: 720px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-evenly;
+        justify-items: center;
+        gap: 20px;
+        margin: 0px calc(10px/2) 0px calc(10px/2);
+        
+        @media (max-width: 720px) {
+            grid-template-columns: 1fr;
+        }
+
+        .widgetPanel {
+            height: 380px;
+        }
+ 
+        .widgetPanelCol1 {
+            width: 380px;
+        }
+    }
+}

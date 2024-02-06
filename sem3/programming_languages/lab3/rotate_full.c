@@ -88,6 +88,7 @@ int readHeader(FILE* file) {
     if (type != 0x4d42) return INVALID_FILE;
     bmpHeader.bfType = type;
     if (fseek(file, 8, SEEK_CUR) != 0) return INVALID_FILE;
+//    bmpHeader.bOffBits
 
 }
 

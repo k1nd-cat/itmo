@@ -1,0 +1,3 @@
+const ACTION_CHANGE_SAVED = "CHANGE_SAVED";
+
+export default ACTION_CHANGE_SAVED;

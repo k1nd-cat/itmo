@@ -1,0 +1,3 @@
+const ACTION_CHANGE_AGE = "CHANGE_AGE";
+
+export default ACTION_CHANGE_AGE;

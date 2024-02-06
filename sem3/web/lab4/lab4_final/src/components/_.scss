@@ -1,0 +1,85 @@
+.saveButton {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.inputPanel {
+    width: 350px;
+    height: 285px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+
+    small {
+        margin-left: 90px;
+    }
+
+    .smallError {
+        color: red;
+    }
+
+    .inputContainer {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+        margin-bottom: 5px;
+
+        .label {
+            width: 90px;
+        }
+
+        .input {
+            width: 200px;
+        }
+
+        .inputNumber {
+            width: 150px;
+            input {
+                width: 104px;
+            }
+        }
+    }
+}
+
+.resultsPanelRoot {
+    width: 100%;
+    background-color: rgb(248, 248, 248);
+    border: none;
+
+    @media (min-width: 721px) {
+        grid-column: 1 / span 2;
+    }
+}
+
+.resultsPanel {
+    background-color: rgb(248, 248, 248);
+    border-radius: 10px;
+    border: none;
+    height: 500px;
+
+    thead {
+        background-color: rgb(248, 248, 248);
+        th {
+            border-bottom: 1px solid #c0c0c0;
+        }
+    }
+
+    .transparrent {
+        background: none;
+        th {
+            background: none;
+        }
+        td {
+            background: none;
+        }
+    }
+
+    .w18 {
+        width: 18%;
+    }
+
+    .w46 {
+        width: 46%;
+    }
+
+}

@@ -1,0 +1,3 @@
+const ACTION_CHANGE_PREV_R = "CHANGE_PREV_R";
+
+export default ACTION_CHANGE_PREV_R;
