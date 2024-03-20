@@ -3,7 +3,7 @@
 28	146	7212610252420364	CMakeFiles/lab3_test.dir/src/file_io.c.obj	b91501d10c75d077
 24	151	7212610252487330	CMakeFiles/lab3_test.dir/src/util.c.obj	d455c90051e7c0ed
 10	152	7212610252559706	CMakeFiles/lab3_test.dir/src/main.c.obj	6b98134869640709
+167	383	7212610254842480	lab3_test.exe	8477f3958e93af28
 0	153	7212610252514990	CMakeFiles/lab3_test.dir/src/console_io.c.obj	779bf13e62040136
 15	161	7212610252559706	CMakeFiles/lab3_test.dir/src/serialization.c.obj	42976c6159e40d3f
 18	167	7212610252679346	CMakeFiles/lab3_test.dir/src/rotation.c.obj	3435678c0bc53db4
-167	383	7212610254842480	lab3_test.exe	8477f3958e93af28
