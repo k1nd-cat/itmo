@@ -11,7 +11,7 @@ void main() async {
   if (value == 1) {
     input = ConsoleInput();
   } else if (value == 2) {
-    input = FileInput("C:/itmo/itmo/sem4/computational_maths/lab1/file2.in");
+    input = FileInput("C:/itmo/itmo/sem4/computational_maths/lab1/file4.in");
   } else {
     input = TestInput();
   }

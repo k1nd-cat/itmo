@@ -1,5 +1,3 @@
-import 'package:decimal/decimal.dart';
-
 class Values {
   late int n;
   late double epsilon;

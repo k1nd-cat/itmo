@@ -148,10 +148,6 @@ class FileInput implements Input {
     return await _readLines();
   }
 
-  void _loadData(Values values) async {
-    values = await _readLines();
-  }
-
   Future<Values> _readLines() async {
     var values = Values();
     var file = File(_filePath);
