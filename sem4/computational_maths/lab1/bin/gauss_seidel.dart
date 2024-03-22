@@ -11,6 +11,9 @@ class GaussSeidel implements Method {
 
   @override
   Result result(Values values) {
+    List<List<double>> beginMatrix = [...values.a];
+    List<double> beginB = [...values.b];
+    List<double> leftPart = [];
     var result = Result();
     print("Исходная матрица:");
     printCurrentMatrix(values.a, values.b);
@@ -27,6 +30,19 @@ class GaussSeidel implements Method {
     print("Приведем систему A𝑥 = 𝑏 к виду 𝑥 = 𝐶𝑥 + 𝑑 :");
     printCurrentMatrix(values.a, values.b);
     result = _iterations(values, result);
+
+    for (int i = 0; i < beginMatrix.length; ++i) {
+      leftPart.add(0);
+      for (int j = 0; j < beginMatrix.length; ++j) {
+        leftPart[i] += beginMatrix[i][j] * result.result![j];
+      }
+    }
+
+    stdout.write("\n\n");
+    for (int i = 0; i < leftPart.length; ++i) {
+      stdout.write("${leftPart[i]} = ${beginB[i]} | Разница: ${(leftPart[i] - beginB[i]).abs()}\n");
+    }
+    stdout.write("\n\n");
 
     return result;
   }
