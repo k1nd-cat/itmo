@@ -10,6 +10,7 @@ environment:
 dependencies:
   args: ^2.4.2
   decimal: ^2.3.3
+  logger: ^2.1.0
 
 dev_dependencies:
   lints: ^3.0.0
