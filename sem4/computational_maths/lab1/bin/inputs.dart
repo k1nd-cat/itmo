@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'values.dart';
 
 abstract class Input {
-  Values? readData() {
+  Future<Values?> readData() async {
     stdout.write("Данная функция пока в разработке");
     return null;
   }
@@ -11,7 +12,7 @@ abstract class Input {
 
 class TestInput implements Input {
   @override
-  Values? readData() {
+  Future<Values?> readData() async {
     var values = Values();
     values.n = 3;
     values.epsilon = 0.01;
@@ -29,9 +30,9 @@ class TestInput implements Input {
   }
 }
 
-class ConsoleInput extends Input {
+class ConsoleInput implements Input {
   @override
-  Values? readData() {
+  Future<Values?> readData() async {
     var values = Values();
     values.n = _inputN();
     values.epsilon = _inputEpsilon();
@@ -134,5 +135,49 @@ class ConsoleInput extends Input {
     }
 
     return value;
+  }
+}
+
+class FileInput implements Input {
+  final String _filePath;
+
+  FileInput(this._filePath);
+
+  @override
+  Future<Values?> readData() async {
+    return await _readLines();
+  }
+
+  void _loadData(Values values) async {
+    values = await _readLines();
+  }
+
+  Future<Values> _readLines() async {
+    var values = Values();
+    var file = File(_filePath);
+    if (await file.exists()) {
+      final lines = file.openRead()
+          .transform(utf8.decoder)
+          .transform(LineSplitter())
+          .toList();
+
+      final data = await lines;
+      int currentLine = 0;
+      values.n = int.parse(data[currentLine++]);
+      values.epsilon = double.parse(data[currentLine++]);
+      values.a = List.generate(values.n, (_) => List.filled(values.n, 0.0));
+      for (int i = 0; i < values.n; i++) {
+        values.a[i] = data[currentLine++].split(' ').map(double.parse).toList();
+      }
+
+      values.b = data[currentLine++].split(' ').map(double.parse).toList();
+      values.x = data[currentLine++].split(' ').map(double.parse).toList();
+      values.M = int.parse(data[currentLine++]);
+
+      return values;
+    }else {
+      print("Файл не найден");
+      exit(0);
+    }
   }
 }

@@ -117,15 +117,16 @@ class GaussSeidel implements Method {
     List<double>? previousX;
     for (int i = 0; i < values.M; ++i) {
       values.x = _oneIteration(values);
-      if (previousX != null) {
-        if (_currentEpsilon(values.x, previousX) < values.epsilon) break;
-      }
 
       print("Итерация ${i + 1}");
       for (int i = 0; i < values.x.length; ++i) {
         stdout.write("x${i+1} = ${values.x[i]}\n");
       }
-      print("");
+
+      if (previousX != null) {
+        print("ε = ${_currentEpsilon(values.x, previousX)}\n");
+        if (_currentEpsilon(values.x, previousX) < values.epsilon) break;
+      }
 
       previousX = values.x;
     }
