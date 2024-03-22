@@ -114,7 +114,7 @@ class GaussSeidel implements Method {
   }
 
   Result _iterations(Values values, Result result) {
-    List<double>? previousX;
+    List<double>? previousX = [...values.x];
     for (int i = 0; i < values.M; ++i) {
       values.x = _oneIteration(values);
 
@@ -126,6 +126,8 @@ class GaussSeidel implements Method {
       if (previousX != null) {
         print("ε = ${_currentEpsilon(values.x, previousX)}\n");
         if (_currentEpsilon(values.x, previousX) < values.epsilon) break;
+      } else {
+        print("");
       }
 
       previousX = values.x;
@@ -140,7 +142,11 @@ class GaussSeidel implements Method {
     for (int i = 0; i < values.a.length; ++i) {
       double rowResult = 0;
       for (int j = 0; j < values.x.length; ++j) {
-        rowResult += values.a[i][j] * values.x[j];
+        if (j < i) {
+          rowResult += values.a[i][j] * result[j];
+        } else if (j > i) {
+          rowResult += values.a[i][j] * values.x[j];
+        }
       }
       rowResult += values.b[i];
       result.add(rowResult);
