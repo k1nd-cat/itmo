@@ -4,7 +4,7 @@ import 'gauss_seidel.dart';
 import 'inputs.dart';
 
 void main() async {
-  Input input;
+  Input input = TestInput();
 
   int value = getValue();
   if (value == 1) {
