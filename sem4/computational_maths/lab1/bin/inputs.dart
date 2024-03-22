@@ -17,12 +17,12 @@ class TestInput implements Input {
     values.n = 3;
     values.epsilon = 0.01;
     values.a = [
-      [2, 2, 10],
-      [10, 1, 1],
-      [2, 10, 1]
+      [10, -7, 0],
+      [-3, 2, 6],
+      [5, -1, 5]
     ];
-    values.b = [14, 12, 13];
-    values.x = [1.4, 1.2, 1.3];
+    values.b = [7, 4, 6];
+    values.x = [0, 0, 0];
     values.M = 100;
 
     return values;

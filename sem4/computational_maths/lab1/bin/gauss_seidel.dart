@@ -15,9 +15,6 @@ class GaussSeidel implements Method {
     print("Исходная матрица:");
     printCurrentMatrix(values.a, values.b);
     _diagonalDominance(values.a, values.b, values.x);
-    values.a = values.a.reversed.toList();
-    values.b = values.b.reversed.toList();
-    values.x = values.x.reversed.toList();
     print("Матрица после диагнализирования:");
     printCurrentMatrix(values.a, values.b);
 
@@ -38,7 +35,7 @@ class GaussSeidel implements Method {
     double max = 0;
     for (int i = 0; i < matrix.length; ++i) {
       double rowSum = matrix[i].reduce((a, b) => a + b).abs();
-      max = max > rowSum ? max : rowSum;
+      max = max >= rowSum ? max : rowSum;
     }
 
     if (max > 1) return false;
@@ -46,28 +43,18 @@ class GaussSeidel implements Method {
   }
 
   void _diagonalDominance(List<List<double>> matrix, List<double> results, List<double> x) {
-    List<int> mainElement = List.filled(matrix.length, -1);
-    for (int i = 0; i < matrix.length; ++i) {
-      double maxValue = matrix[i].reduce((currentMax, next) => currentMax > next ? currentMax : next);
-      double minValue = matrix[i].reduce((currentMin, next) => currentMin < next ? currentMin : next);
-      maxValue = maxValue.abs() > minValue.abs() ? maxValue : minValue;
-      int maxValueIndex = matrix[i].indexOf(maxValue);
-      maxValue = maxValue.abs();
-      double sum = matrix[i].reduce((a, b) => a.abs() + b.abs());
-      sum -= maxValue.abs();
-      if (sum < maxValue) {
-        mainElement[i] = maxValueIndex;
+    var size = matrix.length;
+    int maxRow;
+    for (int i = 0; i < size; ++i) {
+      maxRow = i;
+      for (int j = i + 1; j < size; j++) {
+        if (matrix[j][i].abs() > matrix[maxRow][i].abs()) {
+          maxRow = j;
+        }
       }
-    }
-
-    for (int i = 0; i < mainElement.length; ++i) {
-      if (mainElement[i] == -1 || i == mainElement[i]) continue;
-      _swap(matrix, i, mainElement[i]);
-      _swap(results, i, mainElement[i]);
-      _swap(x, i, mainElement[i]);
-      if (mainElement[mainElement[i]] != -1) {
-        mainElement[mainElement[i]] = i;
-      }
+      _swap(matrix, i, maxRow);
+      _swap(results, i, maxRow);
+      _swap(x, i, maxRow);
     }
   }
 
