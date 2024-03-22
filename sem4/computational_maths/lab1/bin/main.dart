@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'gauss_seidel.dart';
 import 'inputs.dart';
+import 'values.dart';
 
 void main() async {
   Input input = TestInput();
@@ -17,7 +18,12 @@ void main() async {
 
   var values = await input.readData();
   var method = GaussSeidel();
-  var result = method.result(values!);
+  var result = Result();
+  try {
+    result = method.result(values!);
+  } catch (e) {
+    print("Ошибка в выполнении программы");
+  }
   if (result.isExist) {
     print("Результат");
     for (int i = 0; i < result.result!.length; ++i) {
