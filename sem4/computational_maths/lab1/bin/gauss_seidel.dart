@@ -44,6 +44,8 @@ class GaussSeidel implements Method {
     }
     stdout.write("\n\n");
 
+    printCurrentMatrix(beginMatrix, beginB);
+
     return result;
   }
 
