@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2a6d15b-4e7c-424f-9281-3bd9a49c5dfa" name="Changes" comment="result">
+      <change afterPath="$PROJECT_DIR$/../lab2/calculations/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab2/calculations/bin/main.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab2/calculations/bin/task/mathematical_problem.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab2/calculations/bin/task/nonlinear_equation.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab2/calculations/bin/task/nonlinear_equations_system.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/gauss_seidel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/bin/gauss_seidel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file1.in" beforeDir="false" afterPath="$PROJECT_DIR$/file1.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file2.in" beforeDir="false" afterPath="$PROJECT_DIR$/file2.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lab1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/calculations/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/calculations/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/calculations/bin/calculations.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/calculations/calculations.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/calculations/calculations.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,26 +57,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Dart Command Line App.lab1.dart.executor&quot;: &quot;Run&quot;,
-    &quot;Dart Command Line App.main.dart.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Console Font&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Dart Command Line App.lab1.dart.executor": "Run",
+    "Dart Command Line App.main.dart.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/itmo/itmo/sem4/computational_maths/lab1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Console Font",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/bin/main.dart" />
